@@ -1,0 +1,60 @@
+---
+title: "ggplotNOTES"
+author: "LPhelps"
+date: "9/29/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GG Plot stuff from lecture
+
+```{r}
+library(tidyverse)
+starwars
+#if lots of columns, use Glimpse(starwars) to see the column title as rows
+```
+### Plots from video notes
+
+```{r}
+#this creates a plot of height vs weight of the starwars characters
+ggplot(data = starwars) +
+  geom_point(mapping = aes(x = height, y = mass))
+```
+
+```{r}
+#height vs weight plot with colors showing what gender each character is
+ggplot(data = starwars) + geom_point(mapping = aes(x = height, y = mass, color = gender))
+```
+
+```{r}
+#height vs weight plots broken up according to gender, going in horizontal order
+ggplot(data = starwars) + geom_point(mapping = aes(x = height, y = mass)) + facet_grid(.~gender)
+```
+
+```{r}
+#height vs weight plots broken up according to gender, going in vertical order
+ggplot(data = starwars) + geom_point(mapping = aes(x = height, y = mass)) + facet_grid(gender~.)
+```
+
+```{r} 
+# making facets horizontally, til full, then go vertically til al eye colors are shown
+ggplot(data = starwars) + geom_point(mapping = aes(x = height, y = mass)) + facet_wrap(~ eye_color)
+```
+
+```{r} 
+# makes a fitted smooth line over plot points with error grey shading
+ggplot(data = starwars) + geom_smooth(mapping = aes(x = height, y = mass))
+```
+
+```{r}
+#make a histogram with specified binwidth
+ggplot(starwars) + geom_histogram(mapping = aes(x = height), binwidth = 10)
+```
+
+```{r}
+#make a bar chart(categorical variable) with one variable
+ggplot(starwars) + geom_bar(mapping = aes(x = eye_color))
+```
